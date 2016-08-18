@@ -9,8 +9,8 @@
     },
     "require": {
         "emotionloop/visualcaptcha":    "^0.0.4",
-        "netcommons/net-commons":       "dev-master",
-        "netcommons/pages":             "dev-master"
+        "netcommons/net-commons":       "@dev",
+        "netcommons/pages":             "@dev"
     },
     "license": "NetCommons License",
     "authors": [
