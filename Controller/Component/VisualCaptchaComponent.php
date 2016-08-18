@@ -208,11 +208,8 @@ class VisualCaptchaComponent extends Component {
 				// OK判定が出ているか出てないならばリダイレクト
 				if (! $controller->Session->check('VisualCaptcha.judgement')) {
 					// 切り替え後、認証成功時のURLを取り出す
-					$returnUrl = $controller->here;
-					$controller->Session->write(
-						'VisualCaptcha.returnUrl',
-						$returnUrl . '?' . http_build_query($this->controller->request->query)
-					);
+					$returnUrl = $controller->request->here(false);
+					$controller->Session->write('VisualCaptcha.returnUrl', $returnUrl);
 					$controller->redirect(NetCommonsUrl::actionUrl($this->visualCaptchaAction));
 				} else {
 					// 出ているときはリダイレクトない
