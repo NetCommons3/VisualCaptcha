@@ -112,6 +112,17 @@ class VisualCaptchaControllerViewTest extends NetCommonsControllerTestCase {
  * @return void
  */
 	public function testCaptchaAudio() {
+		ob_start();
+		// generateさせてからでないと
+		$url = array(
+			'plugin' => 'visual_captcha',
+			'controller' => 'visual_captcha',
+			'action' => 'captcha',
+			'block_id' => 2,
+			'frame_id' => 6
+		);
+		$this->_testNcAction($url, array('method' => 'get'), null, 'view');
+		// 認証用の音声データは取り出せません
 		$url = array(
 			'plugin' => 'visual_captcha',
 			'controller' => 'visual_captcha',
@@ -119,7 +130,6 @@ class VisualCaptchaControllerViewTest extends NetCommonsControllerTestCase {
 			'block_id' => 2,
 			'frame_id' => 6
 		);
-		ob_start();
 		$this->_testNcAction($url, array('method' => 'get'), null, 'view');
 		$actual = ob_get_clean();
 		// FUJI Streaming応答のときのアサーション方法がわからない
@@ -132,6 +142,17 @@ class VisualCaptchaControllerViewTest extends NetCommonsControllerTestCase {
  * @return void
  */
 	public function testCaptchaImage() {
+		ob_start();
+		// generateさせてからでないと
+		$url = array(
+			'plugin' => 'visual_captcha',
+			'controller' => 'visual_captcha',
+			'action' => 'captcha',
+			'block_id' => 2,
+			'frame_id' => 6
+		);
+		$this->_testNcAction($url, array('method' => 'get'), null, 'view');
+		// 認証用の画像データは取り出せません
 		$url = array(
 			'plugin' => 'visual_captcha',
 			'controller' => 'visual_captcha',
@@ -139,7 +160,6 @@ class VisualCaptchaControllerViewTest extends NetCommonsControllerTestCase {
 			'block_id' => 2,
 			'frame_id' => 6
 		);
-		ob_start();
 		$this->_testNcAction($url, array('method' => 'get'), null, 'view');
 		$actual = ob_get_clean();
 		//$result = $this->_testNcAction($url, array('method' => 'get'), null, 'view');
