@@ -164,16 +164,20 @@ class VisualCaptchaComponent extends Component {
 		// 画像認証リソースファイルへのパス
 		$this->assetPath = App::pluginPath('VisualCaptcha') . 'Resource' . DS . 'visual_captcha';
 
-		// 記録されている正解データを保持
-		$this->imageField = $this->controller->Session->read('visualcaptcha.frontendData.imageFieldName');
-		$this->audioField = $this->controller->Session->read('visualcaptcha.frontendData.audioFieldName');
+		// フレームID別に記録されている正解データを保持
+		$frameId = Hash::get($this->controller->request->query, 'frame_id');
+		$session = new Session('visual_captcha_' . $frameId);
+		$frontendData = $session->get('frontendData');
+		$this->imageField = $frontendData['imageFieldName'];
+		$this->audioField = $frontendData['audioFieldName'];
 		// セキュリティコンポーネントを使用されている場合は
 		// 画像認証フィールドをUnlockにしておく
 		if (array_key_exists('Security', $this->controller->components)) {
 			if ($this->imageField && $this->audioField) {
 				$this->controller->Security->unlockedFields = array(
 					$this->imageField,
-					$this->audioField
+					$this->audioField,
+					'frame_id'
 				);
 			}
 		}
@@ -234,7 +238,7 @@ class VisualCaptchaComponent extends Component {
  */
 	public function check() {
 		$reqData = $this->controller->request->data;
-		$session = new Session();
+		$session = new Session('visual_captcha_' . (Current::read('Frame.id')));
 		$captcha = new Captcha($session, $this->assetPath);
 
 		$ret = false;
@@ -264,7 +268,7 @@ class VisualCaptchaComponent extends Component {
  * @return string
  */
 	public function generate($count = 5) {
-		$session = new Session();
+		$session = new Session('visual_captcha_' . (Current::read('Frame.id')));
 		$lang = Configure::read('Config.language');
 		$imageJsonPath = $this->assetPath . DS . $lang . DS . 'images.json';
 		$audioJsonPath = $this->assetPath . DS . $lang . DS . 'audios.json';
@@ -294,7 +298,7 @@ class VisualCaptchaComponent extends Component {
  * @return string
  */
 	public function image($index) {
-		$session = new Session();
+		$session = new Session('visual_captcha_' . (Current::read('Frame.id')));
 		$captcha = new Captcha($session, $this->assetPath);
 
 		return $captcha->streamImage(array(), $index, 0);
@@ -306,7 +310,7 @@ class VisualCaptchaComponent extends Component {
  * @return streaming data
  */
 	public function audio() {
-		$session = new Session();
+		$session = new Session('visual_captcha_' . (Current::read('Frame.id')));
 		$captcha = new Captcha($session, $this->assetPath);
 		return $captcha->streamAudio(array(), 'mp3');
 	}

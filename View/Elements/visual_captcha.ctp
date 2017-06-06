@@ -50,6 +50,8 @@
 			captcha: {
 				numberOfImages: <?php echo $imageDisplayCount; ?>,
 				url: '<?php echo $this->webroot; ?>',
+				namespaceFieldName: 'frame_id',
+				namespace: '<?php echo Current::read('Frame.id'); ?>',
 				routes: {
 					image : '<?php echo $imagePath; ?>',
 					audio : '<?php echo $audioPath; ?>',
