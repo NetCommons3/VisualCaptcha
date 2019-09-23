@@ -51,7 +51,7 @@ class VisualCaptchaControllerPostTest extends NetCommonsControllerTestCase {
 	public function testPost() {
 		$controller = $this->generate('VisualCaptcha.VisualCaptcha', array(
 			'components' => array(
-				'Auth' => array('user'),
+				//'Auth' => array('user'),
 				'Session',
 				'Security',
 				'VisualCaptcha.VisualCaptcha'
