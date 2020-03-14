@@ -168,8 +168,16 @@ class VisualCaptchaComponent extends Component {
 		$frameId = Hash::get($this->controller->request->query, 'frame_id');
 		$session = new Session('visual_captcha_' . $frameId);
 		$frontendData = $session->get('frontendData');
-		$this->imageField = $frontendData['imageFieldName'];
-		$this->audioField = $frontendData['audioFieldName'];
+		if (isset($frontendData['imageFieldName'])) {
+			$this->imageField = $frontendData['imageFieldName'];
+		} else {
+			$this->imageField = null;
+		}
+		if (isset($frontendData['audioFieldName'])) {
+			$this->audioField = $frontendData['audioFieldName'];
+		} else {
+			$this->audioField = null;
+		}
 		// セキュリティコンポーネントを使用されている場合は
 		// 画像認証フィールドをUnlockにしておく
 		if (array_key_exists('Security', $this->controller->components)) {
