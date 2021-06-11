@@ -32,14 +32,6 @@ class VisualCaptchaController extends VisualCaptchaAppController {
 	);
 
 /**
- * use helpers
- *
- */
-	public $helpers = [
-		'NetCommons.Token'
-	];
-
-/**
  * beforeFilter
  *
  * @return void
