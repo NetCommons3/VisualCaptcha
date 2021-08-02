@@ -1,15 +1,11 @@
-# VisualCaptcha
+VisualCaptcha
 =======
 
+[![Tests Status](https://github.com/NetCommons3/VisualCaptcha/actions/workflows/tests.yml/badge.svg?branch=master)](https://github.com/NetCommons3/VisualCaptcha/actions/workflows/tests.yml)
+[![Coverage Status](https://coveralls.io/repos/NetCommons3/VisualCaptcha/badge.svg?branch=master)](https://coveralls.io/r/NetCommons3/VisualCaptcha?branch=master)
+[![Stable Version](https://img.shields.io/packagist/v/netcommons/visual-captcha.svg?label=stable)](https://packagist.org/packages/netcommons/visual-captcha)
+
 画像認証機能を提供します。<br>
-
-
-[![Build Status](https://travis-ci.org/NetCommons3/VisualCaptcha.svg?branch=master)](https://travis-ci.org/NetCommons3/VisualCaptcha)
-[![Coverage Status](https://img.shields.io/coveralls/NetCommons3/VisualCaptcha.svg)](https://coveralls.io/r/NetCommons3/VisualCaptcha?branch=master)
-
-| dependencies | status |
-| ------------ | ------ |
-| composer.json | [![Dependency Status](https://www.versioneye.com/user/projects/5629b1180c4406000a0008cb/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5629b1180c4406000a0008cb) |
 
 ### 概要
 ロボットでのアクセスを防ぐための、画像認証機能を提供します。<br>
