@@ -252,10 +252,22 @@ class VisualCaptchaComponent extends Component {
 		$ret = false;
 		$errorMessage = __d('visual_captcha', 'No answer! Please try again.');
 		if (isset($reqData[$this->imageField])) {
-			$ret = $captcha->validateImage($reqData[$this->imageField]);
+			// php7.4でUnitTestでWarningが発生する可能性があるため事前にチェックしておく
+			// @see https://github.com/desirepath41/visualCaptcha-packagist/blob/0.0.4/src/visualCaptcha/Captcha.php#L184
+			if ($session->get('validImageOption')) {
+				$ret = $captcha->validateImage($reqData[$this->imageField]);
+			} else {
+				$ret = false;
+			}
 			$errorMessage = __d('visual_captcha', 'Image was NOT valid! Please try again.');
 		} elseif (isset($reqData[$this->audioField])) {
-			$ret = $captcha->validateAudio($reqData[$this->audioField]);
+			// php7.4でUnitTestでWarningが発生する可能性があるため事前にチェックしておく
+			// @see https://github.com/desirepath41/visualCaptcha-packagist/blob/0.0.4/src/visualCaptcha/Captcha.php#L191
+			if ($session->get('validAudioOption')) {
+				$ret = $captcha->validateAudio($reqData[$this->audioField]);
+			} else {
+				$ret = false;
+			}
 			$errorMessage = __d('visual_captcha', 'Accessibility answer was NOT valid! Please try again.');
 		}
 		if ($ret === false) {
